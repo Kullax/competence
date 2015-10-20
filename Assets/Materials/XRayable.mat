@@ -147,16 +147,16 @@ Material:
       data:
         first:
           name: _MainColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .257352948, g: .0227076188, b: .0227076188, a: 1}
       data:
         first:
           name: _XRayColor
         second: {r: 0, g: .313725501, b: 0, a: .497000009}
       data:
         first:
-          name: _XRayCenter
-        second: {r: 99999, g: 99999, b: 99999, a: 1}
-      data:
-        first:
           name: _Center
         second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _XRayCenter
+        second: {r: 99999, g: 99999, b: 99999, a: 1}
