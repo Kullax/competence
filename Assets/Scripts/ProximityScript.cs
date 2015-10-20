@@ -6,6 +6,7 @@ public class ProximityScript : MonoBehaviour {
 
     private NavMeshAgent nav;
     private Vector3 p;
+    private float t;
 
 
 	// Use this for initialization
@@ -17,7 +18,7 @@ public class ProximityScript : MonoBehaviour {
 	void Update () {
         p = GameObject.FindGameObjectWithTag("Enemy").transform.position;
         float l = CalculatePathLength(p);
-        Debug.Log(l > 20);
+//        Debug.Log(l > 20);
         if (l > 20)
             SetWhite();
         else
@@ -26,14 +27,22 @@ public class ProximityScript : MonoBehaviour {
 
     void SetRed()
     {
-        RenderSettings.fogColor = Color.red;
+        float l = t / 2f;
+  //      RenderSettings.fogColor = Color.Lerp(Color.white, Color.red, l);
+        RenderSettings.fogDensity = Mathf.Lerp(0.0f, 0.3f, l);
         RenderSettings.fog = true;
+        if(t < 2f)
+            t += Time.deltaTime;
     }
 
     void SetWhite()
     {
-        RenderSettings.fogColor = Color.white;
+        float l = t / 2f;
+//        RenderSettings.fogColor = Color.Lerp(Color.white, Color.red, l) ;
+        RenderSettings.fogDensity = Mathf.Lerp(0.0f, 0.3f, l);
         RenderSettings.fog = true;
+        if(t > 0)
+            t -= Time.deltaTime;
     }
 
 
