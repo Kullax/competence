@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
   m_Fog: 1
-  m_FogColor: {r: 1, g: 1, b: 1, a: 1}
+  m_FogColor: {r: 1, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0
   m_LinearFogStart: 0
@@ -750,8 +750,9 @@ GameObject:
   - 33: {fileID: 885115515}
   - 135: {fileID: 885115514}
   - 23: {fileID: 885115513}
+  - 114: {fileID: 885115517}
   m_Layer: 9
-  m_Name: Sphere
+  m_Name: ViewCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -812,6 +813,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 951207684}
   m_RootOrder: 0
+--- !u!114 &885115517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 885115512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8bf89d03bc5814c943c7e6738604cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &951207679
 GameObject:
   m_ObjectHideFlags: 0
