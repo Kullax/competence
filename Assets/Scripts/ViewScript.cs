@@ -12,28 +12,42 @@ public class ViewScript : MonoBehaviour {
         AIScript = GetComponent<AI>();
     }
 	
-	// Update is called once per frame
-	void Update () {
-	}
-
     void OnTriggerStay(Collider collider)
     {
         if (collider.tag != "Player")
             return;
         Vector3 direction = collider.transform.position - transform.position;
         float angle = Vector3.Angle(direction, transform.forward);
+        RaycastHit hit;
         if (angle < fieldOfView * 0.5f)
         {
-            RaycastHit hit;
-
             if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
             {
                 if (hit.collider.tag == "Player")
                 {
-                    Debug.DrawLine(transform.position, collider.transform.position);
-                    AIScript.Spottet = true;
+                    if (!AIScript.Spottet)
+                    {
+                        AIScript.SpottedPlayer();
+                        Camera cam = GameObject.FindObjectOfType<Camera>();
+                        SoundScript script = cam.GetComponent<SoundScript>();
+                        script.PlayAware();
+                    }
                     AIScript.SpottedTime = Time.time;
                     AIScript.LastSeen = collider.transform.position;
+                }
+            }
+        }
+
+        if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, 3))
+        {
+            if (hit.collider.tag == "Player")
+            {
+                if (!AIScript.Spottet)
+                {
+                    GameObject.FindObjectOfType<SavedValues>().removeEnemy(this.gameObject);
+                }else
+                {
+                    Debug.Log("you dead");
                 }
             }
         }

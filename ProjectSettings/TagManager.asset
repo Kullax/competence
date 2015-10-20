@@ -7,6 +7,8 @@ TagManager:
   - Arm
   - Empty
   - Enemy
+  - Spawner
+  - Waypoint
   layers:
   - Default
   - TransparentFX
