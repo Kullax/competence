@@ -10,14 +10,7 @@
 	}
 	SubShader
 	{
-		Cull Off
 		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True"}
-		
-		Pass
-		{
-			ZWrite On
-			ColorMask 0
-		}
 
 		Pass
 		{
@@ -53,12 +46,15 @@
 				float mainPart = clamp(log(dist / _Radius), 0, 1);
 				float xRayPart = 1 - mainPart;
 
-				return mainPart * _Color + xRayPart * _XRayColor;
+				fixed4 mainColor = mainPart * _Color;
+				fixed4 xRayColor = xRayPart * _XRayColor;
+
+				return mainColor + xRayColor;
 			}
 			ENDCG
 		}
 	}
 
 	// TODO: this is simply to inherit shadowcasting/receiving passes. Make it ourselves?
-	FallBack "Diffuse"
+	FallBack "Transparent/Cutout/VertexLit"
 }
