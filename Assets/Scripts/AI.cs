@@ -11,6 +11,9 @@ public class AI : MonoBehaviour {
     public enum State { Hunting, Hiding };
 
     public State state = State.Hunting;
+    public bool Spottet = false;
+    public Vector3 LastSeen;
+    public float SpottedTime;
 
     IEnumerator Start()
     {
@@ -43,7 +46,17 @@ public class AI : MonoBehaviour {
 
     IEnumerator HuntingState()
     {
-        Patrolling();
+        if (!Spottet)
+            Patrolling();
+        else
+            HuntPlayer();
+        yield return new WaitForEndOfFrame();
+    }
+
+    IEnumerable SpottedState()
+    {
+        if (Spottet)
+            Flee();
         yield return new WaitForEndOfFrame();
     }
 
@@ -67,6 +80,20 @@ public class AI : MonoBehaviour {
         else
             patrolTimer = 0;
         nav.destination = patrolWayPoints[wayPointIndex].position;
+    }
+
+    void Flee()
+    {
+        nav.speed = 8f;
+    }
+
+    void HuntPlayer()
+    {
+        Debug.Log(".,-");
+        nav.speed = 8f;
+        nav.SetDestination(LastSeen);
+        if (SpottedTime + 5f < Time.time)
+            Spottet = false;
     }
 
 }

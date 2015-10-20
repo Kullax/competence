@@ -284,7 +284,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 410588232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.96000004, z: 0}
+  m_LocalPosition: {x: 0, y: 7.38000011, z: 0}
   m_LocalScale: {x: 62.3261986, y: 1, z: 42.3555679}
   m_Children: []
   m_Father: {fileID: 1385948599}
@@ -739,91 +739,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 256
---- !u!1 &885115512
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 885115516}
-  - 33: {fileID: 885115515}
-  - 135: {fileID: 885115514}
-  - 23: {fileID: 885115513}
-  - 114: {fileID: 885115517}
-  m_Layer: 9
-  m_Name: ViewCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &885115513
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 885115512}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!135 &885115514
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 885115512}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &885115515
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 885115512}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &885115516
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 885115512}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
-  m_Children: []
-  m_Father: {fileID: 951207684}
-  m_RootOrder: 0
---- !u!114 &885115517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 885115512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8bf89d03bc5814c943c7e6738604cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &951207679
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +752,7 @@ GameObject:
   - 23: {fileID: 951207681}
   - 195: {fileID: 951207680}
   - 114: {fileID: 951207685}
+  - 114: {fileID: 951207686}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -895,10 +811,10 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 951207679}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &951207683
 MeshFilter:
@@ -916,8 +832,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.4799999, z: 4.22200012}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children:
-  - {fileID: 885115516}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!114 &951207685
@@ -938,6 +853,21 @@ MonoBehaviour:
   wayPointIndex: 0
   patrolTimer: 0
   state: 0
+  Spottet: 0
+  LastSeen: {x: 0, y: 0, z: 0}
+  SpottedTime: 0
+--- !u!114 &951207686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 951207679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8bf89d03bc5814c943c7e6738604cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fieldOfView: 240
 --- !u!1 &994098622
 GameObject:
   m_ObjectHideFlags: 0
