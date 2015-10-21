@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class SavedValues : MonoBehaviour {
@@ -69,14 +70,7 @@ public class SavedValues : MonoBehaviour {
 
     public Transform[] getWayPoints()
     {
-        Transform[] list = new Transform[waypoints.Length];
-        int n = 0;
-        foreach(var waypoint in waypoints)
-        {
-            list[n] = waypoint.transform;
-            n += 1;
-        }
-        return list;
+        return waypoints.OrderBy(item => Random.Range(-1, 1)).Select(item => item.transform).ToArray();
     }
     
     // Unity's example function..
