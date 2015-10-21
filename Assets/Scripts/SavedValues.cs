@@ -7,7 +7,8 @@ public class SavedValues : MonoBehaviour {
     private Vector3 pos;
     private List<GameObject> enemies;
     public GameObject[] spawnpoints;
-    public GameObject[] waypoints;
+    private GameObject[] waypoints;
+    private GameObject[] computers;
     public bool ArmLooted = false;
     private GameObject player;
     private NavMeshAgent nav;
@@ -61,6 +62,23 @@ public class SavedValues : MonoBehaviour {
         return enemies.Count;
     }
 
+    public int waypointLengt()
+    {
+        return waypoints.Length;
+    }
+
+    public Transform[] getWayPoints()
+    {
+        Transform[] list = new Transform[waypoints.Length];
+        int n = 0;
+        foreach(var waypoint in waypoints)
+        {
+            list[n] = waypoint.transform;
+            n += 1;
+        }
+        return list;
+    }
+    
     // Unity's example function..
     public float CalculatePathLength(Vector3 targetPosition)
     {

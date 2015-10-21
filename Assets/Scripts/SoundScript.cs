@@ -4,8 +4,8 @@ using System.Collections;
 public class SoundScript : MonoBehaviour {
 
     public AudioClip aware;
+    public AudioClip recieving;
     private AudioSource source;
-
 
     void Awake()
     {
@@ -24,5 +24,10 @@ public class SoundScript : MonoBehaviour {
     public void PlayAware()
     {
         source.PlayOneShot(aware);
+    }
+
+    public void PlayRecieving()
+    {
+        source.PlayOneShot(recieving);
     }
 }

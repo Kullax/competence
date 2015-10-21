@@ -4,7 +4,7 @@ using System.Collections;
 public class AI : MonoBehaviour {
 
     private NavMeshAgent nav;
-    //public Transform[] wayPointArray;
+    public Transform[] wayPointArray;
     public int wayPointIndex;
     public float patrolTimer;
 
@@ -21,6 +21,7 @@ public class AI : MonoBehaviour {
     IEnumerator Start()
     {
         sv = GameObject.FindObjectOfType<SavedValues>();
+        wayPointArray = sv.getWayPoints();
         nav = GetComponent<NavMeshAgent>();
         while (true)
         {
@@ -82,7 +83,7 @@ public class AI : MonoBehaviour {
 
             if (patrolTimer >= 1f)
             {
-                if (wayPointIndex == sv.waypoints.Length - 1)
+                if (wayPointIndex == wayPointArray.Length - 1)
                     wayPointIndex = 0;
                 else
                     wayPointIndex++;
@@ -91,7 +92,7 @@ public class AI : MonoBehaviour {
         }
         else
             patrolTimer = 0;
-        nav.destination = sv.waypoints[wayPointIndex].transform.position;
+        nav.destination = wayPointArray[wayPointIndex].transform.position;
     }
 
     void Flee()
