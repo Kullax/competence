@@ -8,9 +8,9 @@ public class SavedValues : MonoBehaviour {
     private List<GameObject> enemies;
     public GameObject[] spawnpoints;
     public GameObject[] waypoints;
+    public bool ArmLooted = false;
     private GameObject player;
     private NavMeshAgent nav;
-
 
     // Use this for initialization
     void Awake () {
@@ -20,7 +20,6 @@ public class SavedValues : MonoBehaviour {
         GameObject[] BadGuys = GameObject.FindGameObjectsWithTag("Enemy");
         spawnpoints = GameObject.FindGameObjectsWithTag("Spawner");
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
-        Debug.Log(". " + waypoints.Length);
 
         foreach (var enemy in BadGuys)
         {

@@ -22,9 +22,6 @@ public class AI : MonoBehaviour {
     {
         sv = GameObject.FindObjectOfType<SavedValues>();
         nav = GetComponent<NavMeshAgent>();
-      //  Debug.Log(wayPointArray.Length);
-        Debug.Log(sv.waypoints.Length);
-//        wayPointArray = new Transform[sv.waypoints.Length];
         while (true)
         {
              yield return StartCoroutine(IdleState());

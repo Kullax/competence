@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Spawner
   - Waypoint
+  - LootEmpty
+  - LootArm
   layers:
   - Default
   - TransparentFX
