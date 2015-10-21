@@ -27,7 +27,7 @@ public class ViewScript : MonoBehaviour {
                 {
                     AIScript.SpottedPlayer();
                     AIScript.SpottedTime = Time.time;
-                    AIScript.LastSeenPosition = collider.gameObject.transform.position;
+                    AIScript.LastSeenTarget = collider.gameObject.transform;
                 }
             }
         }
