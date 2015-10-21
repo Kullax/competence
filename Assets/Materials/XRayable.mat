@@ -135,6 +135,10 @@ Material:
         first:
           name: _Alpha
         second: .5
+      data:
+        first:
+          name: _LightingStrength
+        second: .248999998
     m_Colors:
       data:
         first:
@@ -143,7 +147,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .20588237, g: .0635813177, b: .0635813177, a: 1}
+        second: {r: 1, g: 0, b: .268965721, a: 1}
       data:
         first:
           name: _MainColor
@@ -160,3 +164,7 @@ Material:
         first:
           name: _XRayCenter
         second: {r: 99999, g: 99999, b: 99999, a: 1}
+      data:
+        first:
+          name: _LightingDirection
+        second: {r: 1, g: -1, b: 0, a: 0}
