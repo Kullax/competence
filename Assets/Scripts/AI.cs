@@ -15,7 +15,7 @@ public class AI : MonoBehaviour {
 
     public State state = State.Hunting;
     public bool Spotted = false;
-    public Vector3 LastSeenPosition;
+    public Transform LastSeenTarget;
     public float SpottedTime;
     public TextMesh text;
     private float marktimer = 0;
@@ -73,8 +73,8 @@ public class AI : MonoBehaviour {
     void HuntPlayer()
     {
         nav.speed = 8f;
-        if (Time.time - SpottedTime < 0.20f)
-            nav.SetDestination(LastSeenPosition);
+        if (Time.time - SpottedTime < 0.33f)
+            nav.SetDestination(LastSeenTarget.position);
         if (Time.time - SpottedTime > 5f)
             Spotted = false;
     }
@@ -83,8 +83,6 @@ public class AI : MonoBehaviour {
     {
         if (Spotted)
             return;
-
-        Debug.Log("I hear something!");
 
         marktimer = 0;
         Spotted = true;
@@ -110,7 +108,7 @@ public class AI : MonoBehaviour {
                 return;
 
             ai.SpottedTime = Time.time;
-            ai.LastSeenPosition = LastSeenPosition;
+            ai.LastSeenTarget = LastSeenTarget;
             ai.SpottedPlayer();
         }
     }
