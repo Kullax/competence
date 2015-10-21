@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Policy;
 using UnityEngine;
 using System.Collections;
@@ -83,6 +84,8 @@ public class AI : MonoBehaviour {
         if (Spotted)
             return;
 
+        Debug.Log("I hear something!");
+
         marktimer = 0;
         Spotted = true;
         
@@ -90,8 +93,8 @@ public class AI : MonoBehaviour {
         text.text = "!";
         _playScare();
 
-        // Alert mah friends
-        foreach (var pacman in sv.getEnemies())
+        // Alert mah pacmania friends
+        foreach (var pacman in sv.getEnemies().Where(gj => gj != gameObject))
             ScreamAt(pacman);
     }
 
@@ -101,15 +104,14 @@ public class AI : MonoBehaviour {
         var dist = sv.CalculatePathLength(nav, friend.transform.position);
         if (dist < 70)
         {
-            Debug.Log("I hear something!");
             var ai = friend.GetComponent<AI>();
             if (ai == null || ai.Spotted)
                 // either friend lost his brain, or he already knows about the player, so don't scream
                 return;
 
+            ai.SpottedTime = Time.time;
+            ai.LastSeenPosition = LastSeenPosition;
             ai.SpottedPlayer();
-            ai.SpottedTime = SpottedTime;
-            ai.LastSeenPosition = transform.position;
         }
     }
 }
