@@ -10,12 +10,18 @@
 	}
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True"}
+		Tags { "Queue" = "Transparent" "RenderType" = "Transparent" }
+		ZWrite Off
 
+		Pass{
+			ZWrite On
+			ColorMask 0
+		}
+		
 		Pass
 		{
 			Blend SrcAlpha OneMinusSrcAlpha
-
+			ZWrite Off
 			CGPROGRAM
 			#pragma fragment frag
 			#pragma vertex vert
@@ -40,7 +46,7 @@
 				return o;
 			}
 
-			fixed4 frag (vertOut fragIn) : COLOR
+			fixed4 frag(vertOut fragIn) : COLOR
 			{
 				float dist = distance(_Center, fragIn.worldPos);
 				float mainPart = clamp(log(dist / _Radius), 0, 1);
@@ -55,6 +61,6 @@
 		}
 	}
 
-	// TODO: this is simply to inherit shadowcasting/receiving passes. Make it ourselves?
+	// TODO: this is simply to inherit shadowcasting passes. Make it ourselves?
 	FallBack "Transparent/Cutout/VertexLit"
 }
