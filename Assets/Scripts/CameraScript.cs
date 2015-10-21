@@ -3,11 +3,25 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
     public Transform target;
+    public Transform player;
     public float sensitivityY = 1f;
     public float sensitivityX = 1f;
     private float maxX, minX, maxY, minY;
     SavedValues sv;
     private Vector3 Point;
+
+
+    public float minDistance = 1.0f;
+    public float maxDistance = 2.0f;
+    public float smooth = 0.10f;
+    Vector3 dollyDir;
+    float distance;
+
+    void Awake()
+    {
+        dollyDir = transform.localPosition.normalized;
+        distance = transform.localPosition.magnitude;
+    }
 
     void Start()
     {
@@ -22,7 +36,7 @@ public class CameraScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        transform.localPosition = Point;
+//        transform.localPosition = Point;
         Vector3 input = new Vector3(Input.GetAxis("Mouse X") * sensitivityX, Input.GetAxis("Mouse Y") * sensitivityY, 0);
         target.transform.localPosition += input;
         if (target.transform.localPosition.x < minX)
@@ -41,35 +55,25 @@ public class CameraScript : MonoBehaviour {
         {
             target.transform.localPosition = new Vector3(target.transform.localPosition.x, maxY, target.transform.localPosition.z);
         }
-//        Adjust();
+        Adjust2();
         transform.LookAt(target);
     }
 
-    void Adjust()
+    void Adjust2()
     {
-        Vector3 wantedPosition = transform.position;
-        // check to see if there is anything behind the target
+        Vector3 desiredCameraPos = target.transform.TransformPoint(dollyDir * maxDistance);
         RaycastHit hit;
-        Vector3 back = transform.TransformDirection(-1 * Vector3.forward);
-        Vector3 start = transform.position + Vector3.forward;
-        // cast the bumper ray out from rear and check to see if there is anything behind
-        if (Physics.Raycast(start, back, out hit, 2f))
-        {
-            Debug.DrawLine(start, hit.point);
-            // clamp wanted position to hit position
-            wantedPosition -= back;// * hit.distance;
-        }
-        transform.position = wantedPosition;
-//        transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
+        Vector3 back = player.TransformDirection(Vector3.back);
+        Vector3 start = player.position;
 
-/*        Vector3 lookPosition = target.TransformPoint(targetLookAtOffset);
-
-        if (smoothRotation)
+        if (Physics.Raycast(start, back, out hit, minDistance))
         {
-            Quaternion wantedRotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, Time.deltaTime * rotationDamping);
+            distance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
         }
         else
-            transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);*/
+        {
+            distance = maxDistance;
+        }
+        transform.localPosition= Vector3.Lerp(transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
     }
 }

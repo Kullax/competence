@@ -430,8 +430,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 340844774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.02400005, y: .0930000022, z: -.485000014}
-  m_LocalScale: {x: .100000091, y: 2, z: 1.03026783}
+  m_LocalPosition: {x: -1.03499997, y: .0930000022, z: -.485000014}
+  m_LocalScale: {x: .121512011, y: 2, z: 1.03026783}
   m_Children: []
   m_Father: {fileID: 1385948599}
   m_RootOrder: 8
@@ -3527,6 +3527,24 @@ ParticleRenderer:
     x Tile: 1
     y Tile: 1
     cycles: 1
+--- !u!114 &1710718352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1710718350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8b9700319d7be4ab2c9bb0ef0d9f56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1388281709}
+  player: {fileID: 1152720870}
+  sensitivityY: 1
+  sensitivityX: 1
+  minDistance: 1
+  maxDistance: 4
+  smooth: 10
 --- !u!114 &1710718353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3617,7 +3635,7 @@ SphereCollider:
   m_GameObject: {fileID: 1710718350}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -4201,11 +4219,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423386, guid: 241b106fdbab79f47ba2758fea323e04, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.40999997
+      value: 1.38999999
       objectReference: {fileID: 0}
     - target: {fileID: 423386, guid: 241b106fdbab79f47ba2758fea323e04, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.19000006
+      value: -1.63
       objectReference: {fileID: 0}
     - target: {fileID: 423386, guid: 241b106fdbab79f47ba2758fea323e04, type: 2}
       propertyPath: m_LocalPosition.x
