@@ -13,7 +13,7 @@ public class WinScript : MonoBehaviour {
 	void Update () {
         if (sv.KillCount == sv.KillLimit || sv.ActiveComputers() == 0)
         {
-            sv.Won = true;
+            sv.Paused = true;
             Time.timeScale = 0;
             FindObjectOfType<CanvasScript>().ShowVictory();
         }
@@ -23,5 +23,10 @@ public class WinScript : MonoBehaviour {
     public void Restart()
     {
         Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

@@ -15,7 +15,7 @@ public class SavedValues : MonoBehaviour {
     private NavMeshAgent nav;
     public int KillCount;
     public int KillLimit = 6;
-    public bool Won = false;
+    public bool Paused = false;
 
     // Use this for initialization
     void Awake () {

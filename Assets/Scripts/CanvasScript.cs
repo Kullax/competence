@@ -7,7 +7,8 @@ public class CanvasScript : MonoBehaviour {
     Text enemies;
     Text computers;
     Text objective;
-    Text victory;
+    GameObject victory;
+    GameObject pause;
     SavedValues sv;
     // Use this for initialization
     void Start () {
@@ -18,13 +19,11 @@ public class CanvasScript : MonoBehaviour {
                 enemies = t;
             if (t.name == "Computers")
                 computers = t;
-            if (t.name == "Victory")
-                victory = t;
         }
-        victory.GetComponentInChildren<Button>().GetComponentInChildren<Text>().enabled= false;
-        victory.GetComponentInChildren<Button>().GetComponentInChildren<Image>().enabled = false;
-        victory.GetComponentInChildren<Button>().enabled = false;
-        victory.enabled = false;
+        victory = GameObject.FindGameObjectWithTag("Victory");
+        victory.SetActive(false);
+        pause = GameObject.FindGameObjectWithTag("Pause");
+        pause.SetActive(false);
         sv = GameObject.FindObjectOfType<SavedValues>();
     }
 	
@@ -32,15 +31,25 @@ public class CanvasScript : MonoBehaviour {
 	void Update () {
         enemies.text = "Kills remaining: " + (sv.KillLimit-sv.KillCount);
         computers.text = "Hacks remaining: " + sv.ActiveComputers();
-	}
+        if (Input.GetKeyDown("escape"))
+            HideShowPause();
+    }
 
-    public void ShowVictory()
+    public void ShowVictory() { 
+        victory.SetActive(true);
+    }
+
+    public void HideShowPause()
     {
-//        victory.GetComponentInChildren<Button>().enabled = true;
-        victory.GetComponentInChildren<Button>().GetComponentInChildren<Text>().enabled = true;
-        victory.GetComponentInChildren<Button>().GetComponentInChildren<Image>().enabled = true;
-        victory.GetComponentInChildren<Button>().enabled = true;
-        victory.enabled = true;
-
+        if (pause.activeSelf)
+        {
+            Time.timeScale = 1;
+            sv.Paused = false;
+        }
+        else { 
+        sv.Paused = true;
+        Time.timeScale = 0;
+    }
+        pause.SetActive(!pause.activeSelf);
     }
 }

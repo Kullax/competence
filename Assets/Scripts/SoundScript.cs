@@ -5,16 +5,14 @@ public class SoundScript : MonoBehaviour {
 
     public AudioClip aware;
     public AudioClip recieving;
+    public AudioClip victory;
     private AudioSource source;
 
     void Awake()
     {
         source = GetComponent<AudioSource>();
     }
-	// Use this for initialization
-	void Start () {
 
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,5 +27,10 @@ public class SoundScript : MonoBehaviour {
     public void PlayRecieving()
     {
         source.PlayOneShot(recieving);
+    }
+
+    public void PlayVictory()
+    {
+        source.PlayOneShot(victory);
     }
 }

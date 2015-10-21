@@ -38,7 +38,7 @@ public class CameraScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (sv.Won)
+        if (sv.Paused)
             return;
 //        transform.localPosition = Point;
         Vector3 input = new Vector3(Input.GetAxis("Mouse X") * sensitivityX, Input.GetAxis("Mouse Y") * sensitivityY, 0);

@@ -12,6 +12,8 @@ TagManager:
   - LootEmpty
   - LootArm
   - Computer
+  - Victory
+  - Pause
   layers:
   - Default
   - TransparentFX

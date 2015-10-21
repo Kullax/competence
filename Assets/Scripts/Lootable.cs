@@ -12,6 +12,8 @@ public class Lootable : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (sv.Paused)
+            return;
         transform.Rotate(0, 1, 0);
 	}
 

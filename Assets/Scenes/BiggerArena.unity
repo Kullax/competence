@@ -4205,6 +4205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aware: {fileID: 8300000, guid: 317c02df8da2c3941a59148144191fc9, type: 3}
   recieving: {fileID: 8300000, guid: e3167356696cef140a1b41b986665eb5, type: 3}
+  victory: {fileID: 8300000, guid: 8215c45c2539f2e41bd6bf773b2b9f4b, type: 3}
 --- !u!82 &1710718358
 AudioSource:
   m_ObjectHideFlags: 0
