@@ -25,9 +25,9 @@ public class ViewScript : MonoBehaviour {
             {
                 if (hit.collider.tag == "Player")
                 {
-                    AIScript.SpottedPlayer();
                     AIScript.SpottedTime = Time.time;
                     AIScript.LastSeenTarget = collider.gameObject.transform;
+                    AIScript.SpottedPlayer();
                 }
             }
         }
