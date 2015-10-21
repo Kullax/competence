@@ -6,6 +6,7 @@ public class SoundScript : MonoBehaviour {
     public AudioClip aware;
     public AudioClip recieving;
     public AudioClip victory;
+    public AudioClip pickup;
     private AudioSource source;
 
     void Awake()
@@ -32,5 +33,10 @@ public class SoundScript : MonoBehaviour {
     public void PlayVictory()
     {
         source.PlayOneShot(victory);
+    }
+
+    public void PlayPickup()
+    {
+        source.PlayOneShot(pickup);
     }
 }

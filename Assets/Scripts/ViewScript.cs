@@ -32,7 +32,7 @@ public class ViewScript : MonoBehaviour {
             }
         }
 
-        if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, 3))
+        if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, 2))
         {
             if (hit.collider.tag == "Player")
             {

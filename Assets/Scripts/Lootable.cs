@@ -24,6 +24,9 @@ public class Lootable : MonoBehaviour {
             return;
         sv.ArmLooted = true;
         effect.SetActive(true);
+        Camera cam = GameObject.FindObjectOfType<Camera>();
+        SoundScript script = cam.GetComponent<SoundScript>();
+        script.PlayPickup();
         Destroy(this.gameObject);
     }
 
