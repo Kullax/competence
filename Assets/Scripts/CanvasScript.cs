@@ -7,6 +7,7 @@ public class CanvasScript : MonoBehaviour {
     Text enemies;
     Text computers;
     Text objective;
+    Text victory;
     SavedValues sv;
     // Use this for initialization
     void Start () {
@@ -17,7 +18,13 @@ public class CanvasScript : MonoBehaviour {
                 enemies = t;
             if (t.name == "Computers")
                 computers = t;
+            if (t.name == "Victory")
+                victory = t;
         }
+        victory.GetComponentInChildren<Button>().GetComponentInChildren<Text>().enabled= false;
+        victory.GetComponentInChildren<Button>().GetComponentInChildren<Image>().enabled = false;
+        victory.GetComponentInChildren<Button>().enabled = false;
+        victory.enabled = false;
         sv = GameObject.FindObjectOfType<SavedValues>();
     }
 	
@@ -26,4 +33,14 @@ public class CanvasScript : MonoBehaviour {
         enemies.text = "Kills remaining: " + (sv.KillLimit-sv.KillCount);
         computers.text = "Hacks remaining: " + sv.ActiveComputers();
 	}
+
+    public void ShowVictory()
+    {
+//        victory.GetComponentInChildren<Button>().enabled = true;
+        victory.GetComponentInChildren<Button>().GetComponentInChildren<Text>().enabled = true;
+        victory.GetComponentInChildren<Button>().GetComponentInChildren<Image>().enabled = true;
+        victory.GetComponentInChildren<Button>().enabled = true;
+        victory.enabled = true;
+
+    }
 }

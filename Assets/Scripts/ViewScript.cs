@@ -48,7 +48,6 @@ public class ViewScript : MonoBehaviour {
                 }else
                 {
                     Application.LoadLevel(Application.loadedLevel);
-//                    Debug.Log("you dead");
                 }
             }
         }

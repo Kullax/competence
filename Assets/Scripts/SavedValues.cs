@@ -14,7 +14,8 @@ public class SavedValues : MonoBehaviour {
     private GameObject player;
     private NavMeshAgent nav;
     public int KillCount;
-    public int KillLimit = 10;
+    public int KillLimit = 6;
+    public bool Won = false;
 
     // Use this for initialization
     void Awake () {
