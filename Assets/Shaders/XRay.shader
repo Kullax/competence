@@ -3,6 +3,8 @@
 	Properties
 	{
 		_Color("Color", Color) = (1, 1, 1, 1)
+		_LightingDirection("Lighting Direction", Vector) = (0, 0, 0, 0)
+		_LightingStrength("Lighting Strength", Range(0, 1)) = 0.3
 		_XRayColor("X-Ray Color", Color) = (0, 0, 0, 0.5)
 		_Radius("X-Ray Radius", Float) = 0.5
 
@@ -26,7 +28,11 @@
 			#pragma fragment frag
 			#pragma vertex vert
 
+			#include "UnityCG.cginc"
+
 			fixed4 _Color;
+			vector _LightingDirection;
+			float _LightingStrength;
 			fixed4 _XRayColor;
 			float _Radius;
 			vector _Center;
@@ -34,14 +40,23 @@
 			struct vertOut {
 				float4 pos : SV_POSITION;
 				float4 worldPos : TEXCOORD0;
+				float4 color : TEXTCOORD1;
 			};
 
-			vertOut vert(vector v : POSITION)
+			vertOut vert(appdata_base v)
 			{
 				vertOut o;
 
-				o.pos = mul(UNITY_MATRIX_MVP, v);
-				o.worldPos = mul(_Object2World, v);
+				vector norm = vector (v.normal, 0);
+				float dotProd = dot(norm, _LightingDirection);
+				float lengthProd = length(norm) * length(_LightingDirection);
+				float piAngle = acos(dotProd / lengthProd) / 3.14;
+				float lightColor = fixed4(piAngle * _Color.rgb, 1);
+
+				
+				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.worldPos = mul(_Object2World, v.vertex);
+				o.color = lerp(_Color, lightColor, _LightingStrength);
 
 				return o;
 			}
@@ -52,7 +67,7 @@
 				float mainPart = clamp(log(dist / _Radius), 0, 1);
 				float xRayPart = 1 - mainPart;
 
-				fixed4 mainColor = mainPart * _Color;
+				fixed4 mainColor = mainPart * fixed4(fragIn.color.rgb, 1);
 				fixed4 xRayColor = xRayPart * _XRayColor;
 
 				return mainColor + xRayColor;
