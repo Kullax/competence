@@ -12,11 +12,27 @@
 		Cull Off
 
 		Pass{
-			ZWrite On
-			ColorMask 0
+			ZTest On	
+			ColorMask RGB
+			
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+
+			fixed4 _Color;
+
+			vector vert(vector v : POSITION) : SV_POSITION {
+				return mul(UNITY_MATRIX_MVP, v);
+			}
+
+			fixed4 frag(vector f : SV_POSITION) : COLOR {
+				return _Color;
+			}
+			ENDCG
 		}
 
 		Pass {
+			Blend SrcAlpha OneMinusSrcAlpha
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -42,11 +58,12 @@
 
 			fixed4 frag(vertOut fragIn) : COLOR
 			{
+				float beat = (sin(_Beats * _Time.y) + 1) / 2;
 				float dist = distance(_WorldSpaceCameraPos, fragIn.worldPos.xyz);
-				float ratio = clamp(dist / _ViewDistance, 0, 1);
+				float ratio = clamp((dist / _ViewDistance), 0.5, 1);
 
 				fixed4 c = _Color;
-				c.a = 1 - ratio;
+				c.a = beat * (1 - ratio);
 			
 				return c;
 			}
