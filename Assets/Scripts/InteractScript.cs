@@ -10,6 +10,7 @@ public class InteractScript : MonoBehaviour {
         if (collider.tag != "Player")
             return;
         Renderer rend = GetComponent<Renderer>();
-        rend.material = offmat
+        rend.material = offmat;
+
     }
 }
