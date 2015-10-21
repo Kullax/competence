@@ -24,7 +24,7 @@ public class SpawnScript : MonoBehaviour {
             foreach (var point in sv.spawnpoints)
             {
                 pos = point.transform.position;
-                float tmp = sv.CalculatePathLength(pos);
+                float tmp = sv.CalculatePathLength(sv.PlayerNav, pos);
                 if (tmp > l)
                 {
                     l = tmp;

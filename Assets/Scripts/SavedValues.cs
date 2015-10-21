@@ -12,7 +12,7 @@ public class SavedValues : MonoBehaviour {
     private GameObject[] computers;
     public bool ArmLooted = false;
     private GameObject player;
-    private NavMeshAgent nav;
+    public NavMeshAgent PlayerNav;
     public int KillCount;
     public int KillLimit = 6;
     public bool Paused = false;
@@ -32,7 +32,7 @@ public class SavedValues : MonoBehaviour {
             enemies.Add(enemy);
         }
 
-        nav = player.GetComponent<NavMeshAgent>();
+        PlayerNav = player.GetComponent<NavMeshAgent>();
     }
 
     public void setPoint(Vector3 newPoint)
@@ -78,15 +78,19 @@ public class SavedValues : MonoBehaviour {
     }
     
     // Unity's example function..
-    public float CalculatePathLength(Vector3 targetPosition)
+    public float CalculatePathLength(NavMeshAgent nav, Vector3 targetPosition)
     {
+        // Added condition since it was returning impossible values if given same position :P
+        if (nav.transform.position == targetPosition)
+            return 0;
+
         // Create a path and set it based on a target position.
-        NavMeshPath path = new NavMeshPath();
+        var path = new NavMeshPath();
         if (nav.enabled)
             nav.CalculatePath(targetPosition, path);
 
         // Create an array of points which is the length of the number of corners in the path + 2.
-        Vector3[] allWayPoints = new Vector3[path.corners.Length + 2];
+        var allWayPoints = new Vector3[path.corners.Length + 2];
 
         // The first point is the player position.
         allWayPoints[0] = player.transform.position;
@@ -95,10 +99,8 @@ public class SavedValues : MonoBehaviour {
         allWayPoints[allWayPoints.Length - 1] = targetPosition;
 
         // The points inbetween are the corners of the path.
-        for (int i = 0; i < path.corners.Length; i++)
-        {
+        for (var i = 0; i < path.corners.Length; i++)
             allWayPoints[i + 1] = path.corners[i];
-        }
 
         // Create a float to store the path length that is by default 0.
         float pathLength = 0;
@@ -124,5 +126,4 @@ public class SavedValues : MonoBehaviour {
         }
         return o;
     }
-
 }

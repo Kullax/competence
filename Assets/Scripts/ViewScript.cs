@@ -25,15 +25,9 @@ public class ViewScript : MonoBehaviour {
             {
                 if (hit.collider.tag == "Player")
                 {
-                    if (!AIScript.Spottet)
-                    {
-                        AIScript.SpottedPlayer();
-                        Camera cam = GameObject.FindObjectOfType<Camera>();
-                        SoundScript script = cam.GetComponent<SoundScript>();
-                        script.PlayAware();
-                    }
+                    AIScript.SpottedPlayer();
                     AIScript.SpottedTime = Time.time;
-                    AIScript.LastSeen = collider.transform.position;
+                    AIScript.LastSeenPosition = collider.gameObject.transform.position;
                 }
             }
         }
@@ -42,13 +36,10 @@ public class ViewScript : MonoBehaviour {
         {
             if (hit.collider.tag == "Player")
             {
-                if (!AIScript.Spottet)
-                {
-                    GameObject.FindObjectOfType<SavedValues>().removeEnemy(this.gameObject);
-                }else
-                {
+                if (!AIScript.Spotted)
+                    FindObjectOfType<SavedValues>().removeEnemy(gameObject);
+                else
                     Application.LoadLevel(Application.loadedLevel);
-                }
             }
         }
     }

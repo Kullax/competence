@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ProximityScript : MonoBehaviour {
 
@@ -9,7 +8,7 @@ public class ProximityScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        sv = GameObject.FindObjectOfType<SavedValues>();
+        sv = FindObjectOfType<SavedValues>();
     }
 
     // Update is called once per frame
@@ -18,7 +17,7 @@ public class ProximityScript : MonoBehaviour {
         foreach (var enemy in sv.getEnemies())
         {
             pos = enemy.transform.position;
-            float tmp = sv.CalculatePathLength(pos);
+            float tmp = sv.CalculatePathLength(sv.PlayerNav, pos);
             if (tmp <= l)
             {
                 l = tmp;

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Security.Policy;
+using UnityEngine;
 using System.Collections;
 
 public class AI : MonoBehaviour {
@@ -11,65 +13,37 @@ public class AI : MonoBehaviour {
     public enum State { Hunting, Hiding };
 
     public State state = State.Hunting;
-    public bool Spottet = false;
-    public Vector3 LastSeen;
+    public bool Spotted = false;
+    public Vector3 LastSeenPosition;
     public float SpottedTime;
     public TextMesh text;
     private float marktimer = 0;
     private SavedValues sv;
 
+    private Action _playScare;
+
     IEnumerator Start()
     {
-        sv = GameObject.FindObjectOfType<SavedValues>();
+        sv = FindObjectOfType<SavedValues>();
         wayPointArray = sv.getWayPoints();
         nav = GetComponent<NavMeshAgent>();
+
+        _playScare = Camera.main.GetComponent<SoundScript>().PlayAware;
+
         while (true)
-        {
-             yield return StartCoroutine(IdleState());
-        }
-
-    }
-
-
-    IEnumerator IdleState()
-    {
-        yield return new WaitForEndOfFrame();
-        switch (state)
-        {
-            case (State.Hiding):
-                yield return StartCoroutine(HidingState());
-                break;
-            case (State.Hunting):
-                yield return StartCoroutine(HuntingState());
-                break;
-            default:
-                break;
-        }
-    }
-    IEnumerator HidingState()
-    {
-        yield return new WaitForEndOfFrame();
+            yield return StartCoroutine(HuntingState());
     }
 
     IEnumerator HuntingState()
     {
         marktimer += Time.deltaTime;
         if(marktimer > 2f)
-        {
             text.text = "";
-        }
-        if (!Spottet)
-          Patrolling();
+        if (!Spotted)
+            Patrolling();
         else
             HuntPlayer();
-        yield return new WaitForEndOfFrame();
-    }
-
-    IEnumerable SpottedState()
-    {
-        if (Spottet)
-            Flee();
-        yield return new WaitForEndOfFrame();
+        yield return null;
     }
 
     // Script from example, simple patrolling.
@@ -77,7 +51,7 @@ public class AI : MonoBehaviour {
     {
         text.text = "";
         nav.speed = 2f;
-        if (/*nav.destination == lastPlayerSighting.resetPosition || */nav.remainingDistance < nav.stoppingDistance)
+        if (nav.remainingDistance < nav.stoppingDistance)
         {
             patrolTimer += Time.deltaTime;
 
@@ -95,25 +69,47 @@ public class AI : MonoBehaviour {
         nav.destination = wayPointArray[wayPointIndex].transform.position;
     }
 
-    void Flee()
-    {
-        nav.speed = 8f;
-    }
-
     void HuntPlayer()
     {
         nav.speed = 8f;
-        nav.SetDestination(LastSeen);
-        if (SpottedTime + 5f < Time.time)
-            Spottet = false;
+        if (Time.time - SpottedTime < 0.20f)
+            nav.SetDestination(LastSeenPosition);
+        if (Time.time - SpottedTime > 5f)
+            Spotted = false;
     }
 
     public void SpottedPlayer()
     {
+        if (Spotted)
+            return;
+
         marktimer = 0;
-        Spottet = true;
+        Spotted = true;
         
+        // Do the MGS
         text.text = "!";
+        _playScare();
+
+        // Alert mah friends
+        foreach (var pacman in sv.getEnemies())
+            ScreamAt(pacman);
     }
 
+    private void ScreamAt(GameObject friend)
+    {
+        // Can our friend hear us?
+        var dist = sv.CalculatePathLength(nav, friend.transform.position);
+        if (dist < 70)
+        {
+            Debug.Log("I hear something!");
+            var ai = friend.GetComponent<AI>();
+            if (ai == null || ai.Spotted)
+                // either friend lost his brain, or he already knows about the player, so don't scream
+                return;
+
+            ai.SpottedPlayer();
+            ai.SpottedTime = SpottedTime;
+            ai.LastSeenPosition = transform.position;
+        }
+    }
 }
