@@ -3616,7 +3616,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1710718350}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
@@ -4205,11 +4205,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423386, guid: 241b106fdbab79f47ba2758fea323e04, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.26999998
+      value: -2.19000006
       objectReference: {fileID: 0}
     - target: {fileID: 423386, guid: 241b106fdbab79f47ba2758fea323e04, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .730000019
+      value: .519999981
       objectReference: {fileID: 0}
     - target: {fileID: 179368, guid: 241b106fdbab79f47ba2758fea323e04, type: 2}
       propertyPath: m_TagString
@@ -4219,7 +4219,8 @@ Prefab:
       propertyPath: near clip plane
       value: .100000001
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11483680, guid: 241b106fdbab79f47ba2758fea323e04, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 241b106fdbab79f47ba2758fea323e04, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1979227189

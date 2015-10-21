@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Camera : MonoBehaviour {
+public class CameraScript : MonoBehaviour {
     public Transform target;
     public float sensitivityY = 1f;
     public float sensitivityX = 1f;
@@ -41,7 +41,7 @@ public class Camera : MonoBehaviour {
         {
             target.transform.localPosition = new Vector3(target.transform.localPosition.x, maxY, target.transform.localPosition.z);
         }
-        Adjust();
+//        Adjust();
         transform.LookAt(target);
     }
 
