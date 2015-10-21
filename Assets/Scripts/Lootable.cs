@@ -4,6 +4,7 @@ using System.Collections;
 public class Lootable : MonoBehaviour {
     SavedValues sv;
     public GameObject effect;
+    public GameObject pilar;
 
     // Use this for initialization
     void Start () {
@@ -27,6 +28,7 @@ public class Lootable : MonoBehaviour {
         Camera cam = GameObject.FindObjectOfType<Camera>();
         SoundScript script = cam.GetComponent<SoundScript>();
         script.PlayPickup();
+        Destroy(pilar);
         Destroy(this.gameObject);
     }
 

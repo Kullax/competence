@@ -332,11 +332,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6b8eab1a2d23840b68b16cd7dbd352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wayPointArray: []
   wayPointIndex: 0
   patrolTimer: 0
   state: 0
-  Spottet: 0
-  LastSeen: {x: 0, y: 0, z: 0}
+  Spotted: 0
+  LastSeenTarget: {fileID: 0}
   SpottedTime: 0
   text: {fileID: 10224296}
 --- !u!135 &13502018
@@ -389,7 +390,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: .5
