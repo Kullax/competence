@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class InteractScript : MonoBehaviour {
-    private bool done = false;
+    public bool done = false;
 
     public Material offmat;
 

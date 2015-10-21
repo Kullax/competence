@@ -13,6 +13,8 @@ public class SavedValues : MonoBehaviour {
     public bool ArmLooted = false;
     private GameObject player;
     private NavMeshAgent nav;
+    public int KillCount;
+    public int KillLimit = 10;
 
     // Use this for initialization
     void Awake () {
@@ -22,6 +24,7 @@ public class SavedValues : MonoBehaviour {
         GameObject[] BadGuys = GameObject.FindGameObjectsWithTag("Enemy");
         spawnpoints = GameObject.FindGameObjectsWithTag("Spawner");
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        computers = GameObject.FindGameObjectsWithTag("Computer");
 
         foreach (var enemy in BadGuys)
         {
@@ -29,7 +32,6 @@ public class SavedValues : MonoBehaviour {
         }
 
         nav = player.GetComponent<NavMeshAgent>();
-
     }
 
     public void setPoint(Vector3 newPoint)
@@ -56,6 +58,7 @@ public class SavedValues : MonoBehaviour {
     {
         enemies.Remove(BadGuy);
         Destroy(BadGuy);
+        KillCount += 1;
     }
 
     public int enemiesLength()
@@ -106,6 +109,19 @@ public class SavedValues : MonoBehaviour {
         }
 
         return pathLength;
+    }
+
+    public int ActiveComputers()
+    {
+        int o = 0;
+        foreach (var computer in computers)
+        {
+            if (! computer.GetComponent<InteractScript>().done)
+            {
+                o += 1;
+            }
+        }
+        return o;
     }
 
 }

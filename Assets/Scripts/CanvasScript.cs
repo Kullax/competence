@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class CanvasScript : MonoBehaviour {
 
     Text enemies;
+    Text computers;
     Text objective;
     SavedValues sv;
     // Use this for initialization
@@ -14,12 +15,15 @@ public class CanvasScript : MonoBehaviour {
         {
             if (t.name == "Enemies")
                 enemies = t;
+            if (t.name == "Computers")
+                computers = t;
         }
         sv = GameObject.FindObjectOfType<SavedValues>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        enemies.text = "Enemies " + sv.enemiesLength();
+        enemies.text = "Kills remaining: " + (sv.KillLimit-sv.KillCount);
+        computers.text = "Hacks remaining: " + sv.ActiveComputers();
 	}
 }

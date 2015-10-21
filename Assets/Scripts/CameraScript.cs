@@ -7,6 +7,8 @@ public class CameraScript : MonoBehaviour {
     public float sensitivityY = 1f;
     public float sensitivityX = 1f;
     private float maxX, minX, maxY, minY;
+    public LayerMask mask = -1;
+
     SavedValues sv;
     private Vector3 Point;
 
@@ -66,7 +68,7 @@ public class CameraScript : MonoBehaviour {
         Vector3 back = player.TransformDirection(Vector3.back);
         Vector3 start = player.position;
 
-        if (Physics.Raycast(start, back, out hit, minDistance))
+        if (Physics.Raycast(start, back, out hit, minDistance, mask))
         {
             distance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
         }

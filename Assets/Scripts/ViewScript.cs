@@ -47,7 +47,8 @@ public class ViewScript : MonoBehaviour {
                     GameObject.FindObjectOfType<SavedValues>().removeEnemy(this.gameObject);
                 }else
                 {
-                    Debug.Log("you dead");
+                    Application.LoadLevel(Application.loadedLevel);
+//                    Debug.Log("you dead");
                 }
             }
         }
