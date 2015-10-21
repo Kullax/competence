@@ -10,9 +10,6 @@ public class InteractScript : MonoBehaviour {
         if (collider.tag != "Player")
             return;
         Renderer rend = GetComponent<Renderer>();
-        rend.material = 
-        gameObject.renderer.
-        effect.SetActive(true);
-        Destroy(this.gameObject)
+        rend.material = offmat
     }
 }

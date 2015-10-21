@@ -93,14 +93,6 @@ Material:
         second: .5
       data:
         first:
-          name: _Beats
-        second: 1.5
-      data:
-        first:
-          name: _ViewDistance
-        second: 25
-      data:
-        first:
           name: _Parallax
         second: .0199999996
       data:
@@ -135,6 +127,14 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _Beats
+        second: 1.5
+      data:
+        first:
+          name: _ViewDistance
+        second: 999
     m_Colors:
       data:
         first:
