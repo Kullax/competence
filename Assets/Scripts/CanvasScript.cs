@@ -25,6 +25,7 @@ public class CanvasScript : MonoBehaviour {
         pause = GameObject.FindGameObjectWithTag("Pause");
         pause.SetActive(false);
         sv = GameObject.FindObjectOfType<SavedValues>();
+        Cursor.visible = false;
     }
 	
 	// Update is called once per frame
@@ -37,6 +38,7 @@ public class CanvasScript : MonoBehaviour {
 
     public void ShowVictory() { 
         victory.SetActive(true);
+        Cursor.visible = true;
     }
 
     public void HideShowPause()
@@ -45,9 +47,13 @@ public class CanvasScript : MonoBehaviour {
         {
             Time.timeScale = 1;
             sv.Paused = false;
+            Cursor.visible = false;
+
         }
-        else { 
-        sv.Paused = true;
+        else {
+            Cursor.visible = true;
+
+            sv.Paused = true;
         Time.timeScale = 0;
     }
         pause.SetActive(!pause.activeSelf);

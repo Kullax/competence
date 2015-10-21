@@ -45,10 +45,12 @@ public class CameraScript : MonoBehaviour {
         target.transform.localPosition += input;
         if (target.transform.localPosition.x < minX)
         {
+            GameObject.FindGameObjectWithTag("Player").transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X"), 0) * 150f * Time.deltaTime);
             target.transform.localPosition = new Vector3(minX, target.transform.localPosition.y, target.transform.localPosition.z);
         }
         if (target.transform.localPosition.x > maxX)
         {
+            GameObject.FindGameObjectWithTag("Player").transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X"), 0) * 150f * Time.deltaTime);
             target.transform.localPosition = new Vector3(maxX, target.transform.localPosition.y, target.transform.localPosition.z);
         }
         if (target.transform.localPosition.y < minY)

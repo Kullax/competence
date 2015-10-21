@@ -32,7 +32,7 @@ public class ProximityScript : MonoBehaviour {
     void SetRed()
     {
         float l = t / 2f;
-        RenderSettings.fogDensity = Mathf.Lerp(0.0f, 0.1f, l);
+        RenderSettings.fogDensity = Mathf.Lerp(0.0f, 0.05f, l);
         RenderSettings.fog = true;
         if(t < 2f)
             t += Time.deltaTime;
@@ -41,7 +41,7 @@ public class ProximityScript : MonoBehaviour {
     void SetWhite()
     {
         float l = t / 2f;
-        RenderSettings.fogDensity = Mathf.Lerp(0.0f, 0.1f, l);
+        RenderSettings.fogDensity = Mathf.Lerp(0.0f, 0.05f, l);
         RenderSettings.fog = true;
         if(t > 0)
             t -= Time.deltaTime;
